@@ -7,17 +7,17 @@ import os
 import pathlib
 
 def module_list():
-  print("\nModules:")
+  print("\nModules:\n")
 
   for potential_module in glob.glob("./modules/*.py"):
     try:
       module_name = "modules.{0}".format(pathlib.Path(potential_module).stem)
       imported_module = importlib.import_module(module_name)
 
-      print("")
       print("  {0}:".format(imported_module.module_name()))
-      print("    \"{0}\"".format(imported_module.module_help()))
+      print("    {0}".format(imported_module.module_help()))
       print("    Usage: {0}".format(imported_module.module_usage()))
+      print("")
     except:
       pass
 
