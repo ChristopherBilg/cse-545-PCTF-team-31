@@ -11,10 +11,15 @@ CSE 545: Software Security - PCTF - Team 31
 
 ## Environment
 
+TShark v3.2.3 or higher
+
+WireShark v3.2.3 or higher
+
 Python v3.8.5 or higher
 
 - argparse v1.4.0 or higher
 - pathlib v1.0.1 or higher
+- pyshark v0.4.2.11 or higher
 
 ## Development
 
