@@ -15,20 +15,20 @@ _g_arguments_dict = {}
 ####################  FUNCTIONS  ##################################
 
 def module_name():
-    return "net-analyzer\n"
+    return "net-analyzer"
 
 def module_help():
-    return """This module captures live network packets into an rcap file.\n
-            Arguments:\n
-            # -i: Capture interface [ex: eth0]\n
-            # -f: RCAP filename\n
-            # -t: How long the capture will run in seconds (timeout or number of packets which comes first)\n
-            # -p: How many packets to capture (timeout or number of packets which comes first)\n
-            # -a: Whether to save the capture in a local array [ex: yes]\n
-            # -v: Whether to print the captured packets [ex: yes]\n"""
+    return """This module captures live network packets into an rcap file.
+            Arguments:
+            # -i: Capture interface [ex: eth0]
+            # -f: RCAP filename
+            # -t: How long the capture will run in seconds (timeout or number of packets which comes first)
+            # -p: How many packets to capture (timeout or number of packets which comes first)
+            # -a: Whether to save the capture in a local array [ex: yes]
+            # -v: Whether to print the captured packets [ex: yes]"""
 
 def module_usage():
-    return "python3 net-analyzer.py -i eth0 -f net-analyzer.cap -t 100 -p 100 -a yes -v yes\n"
+    return "{0} -i <interface: eth0> -f <file: net-analyzer.cap> -t <timeout: 100> -p <packet_limit: 100> -a <local_array: yes> -v <verbose: yes>".format(module_name())
 
 
 def readArguments():
