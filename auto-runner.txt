@@ -1,0 +1,1 @@
+echo "Auto runner first command. Add commands on each line to have them run automatically."
