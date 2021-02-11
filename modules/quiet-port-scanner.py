@@ -1,8 +1,20 @@
+#!/usr/bin/env python3
+
 import argparse
 from scapy.all import *
+import subprocess
 import os
 import sys
 import random
+
+def module_name():
+	return "quiet-port-scanner"
+
+def module_help():
+	return "a quiet port scanner to find open ports on opponents machines"
+
+def module_usage():
+	return subprocess.check_output("python3 modules/quiet-port-scanner.py -h", shell=True).decode("utf-8")
 
 def randomPort():
 	rand = random.randint(1023,10000)#avoid designated port
