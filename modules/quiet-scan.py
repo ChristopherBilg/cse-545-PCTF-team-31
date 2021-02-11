@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 import subprocess
+import sys, getopt, os
 
-path = "/mnt/hgfs/CSE545/PCTF/"
-ip_list_file_name = "IP_list.txt"
-ip_list_file = path + ip_list_file_name
-nmap_output_file = "nmap_output.txt"
+cwd = os.getcwd()
+path = cwd + "/modules/port_scanner_files/"
+ip_list_file = path + "input/IP_list.txt"
+nmap_output_file = path + "temp_output/nmap_output"
 
 def module_name():
   return "quiet-scan"
@@ -31,13 +32,13 @@ def system_call(program_name, args = [], privilege = False):
     subprocess.call(call, shell=True)
 
 
-def parse_nmap_output(nmap_output = "nmap_output.txt", services_list = "services_list.txt"):
-
+def parse_nmap_output(ipAddr, nmap_output):
+    services_list = path + "scan_output/services_list" + "_" + ipAddr + ".txt"
     nmap_fp = open(nmap_output, 'r')
 
     line_in = nmap_fp.readline()
 
-    while(line_in.find("STATE SERVICE") == -1):
+    while(line_in.find("STATE") == -1 and line_in.find("SERVICE") == -1): #Fixed a bug in this line as it was looping infinitely because the previous check was "STATE SERVICE", but sometimes, we endup in getting an extra space and none of the lines match
         line_in = nmap_fp.readline()
 
     services_fp = open(services_list, 'w')
@@ -45,7 +46,10 @@ def parse_nmap_output(nmap_output = "nmap_output.txt", services_list = "services
     line_in = nmap_fp.readline()
             
     while (line_in and line_in.strip() != ''):
-        
+        if(line_in.lower().find("closed") != -1): #IF port is closed, continue parsing the next line
+            line_in = nmap_fp.readline()
+            continue
+
         str_split = line_in.split('/')
         str_split_2 = str_split[-1].split(' ')
 
@@ -64,17 +68,25 @@ def parse_nmap_output(nmap_output = "nmap_output.txt", services_list = "services
     nmap_fp.close()
 
 
-def main():
+def buildArgs(argv, line, fileName):
+    arr = [line.strip()]
+    if(len(argv) > 0):
+        arr.extend(argv)
+    arr.extend([">", fileName])
+    return arr      
+
+def main(argv):
+
   
     with open(ip_list_file ,'r') as file:
 
         line = file.readline()
-        
         while line:
-            system_call("nmap -sS", [line.strip(), ">", nmap_output_file], True)
+            fileName = nmap_output_file + "_" + line + ".txt"
+            system_call("nmap -sS", buildArgs(argv, line, fileName), True) #-p- to scan all the ports
+            parse_nmap_output(line, fileName)
             line = file.readline()
 
-    parse_nmap_output(nmap_output_file)
 
 if __name__ == "__main__":
-  main()
+  main(sys.argv[1:])
