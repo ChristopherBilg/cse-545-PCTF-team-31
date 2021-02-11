@@ -10,10 +10,10 @@ ip_list_file = path + "input/IP_list.txt"
 nmap_output_file = path + "temp_output/nmap_output"
 
 def module_name():
-  return "quiet-scan"
+  return "quiet-scan-threaded"
 
 def module_help():
-  return "quiet port scanner tool"
+  return "quiet port scanner tool (threaded)"
 
 def module_usage():
   return "{0}".format(module_name())
