@@ -18,14 +18,19 @@ def module_usage():
 def main():
   start_time = time.time()
   
-  with open("./auto-runner.txt", "r") as runner_commands:
+  try:
+    with open("./auto-runner.txt", "r") as runner_commands:
       command = runner_commands.readline()
       count = 1
       while command:
-          print("{0}. Running: {1}".format(count, command[:-1]))
-          subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-          count = count + 1
-          command = runner_commands.readline()
+        print("{0}. Running: {1}".format(count, command[:-1]))
+        
+        subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        
+        count = count + 1
+        command = runner_commands.readline()
+  except Exception as e:
+    print(e)
 
   end_time = time.time()
   total_time = math.ceil(end_time - start_time)
