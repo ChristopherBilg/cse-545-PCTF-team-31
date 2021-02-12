@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import math
-import os
+import subprocess
 import time
 
-SLEEP_TIME = 3 * 60
+SLEEP_TIME = 2 * 60
 
 def module_name():
   return "auto-runner"
@@ -23,7 +23,7 @@ def main():
       count = 1
       while command:
           print("{0}. Running: {1}".format(count, command[:-1]))
-          os.system(command)
+          subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
           count = count + 1
           command = runner_commands.readline()
 
