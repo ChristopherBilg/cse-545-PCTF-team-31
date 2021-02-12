@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import math
-import os
+import subprocess
 import time
 
-SLEEP_TIME = 3 * 60
+SLEEP_TIME = 2 * 60
 
 def module_name():
   return "auto-runner"
@@ -18,14 +18,19 @@ def module_usage():
 def main():
   start_time = time.time()
   
-  with open("./auto-runner.txt", "r") as runner_commands:
+  try:
+    with open("./auto-runner.txt", "r") as runner_commands:
       command = runner_commands.readline()
       count = 1
       while command:
-          print("{0}. Running: {1}".format(count, command[:-1]))
-          os.system(command)
-          count = count + 1
-          command = runner_commands.readline()
+        print("{0}. Running: {1}".format(count, command[:-1]))
+        
+        subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        
+        count = count + 1
+        command = runner_commands.readline()
+  except Exception as e:
+    print(e)
 
   end_time = time.time()
   total_time = math.ceil(end_time - start_time)
