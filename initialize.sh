@@ -3,6 +3,7 @@ sudo apt-get install python
 sudo apt-get install python3
 sudo apt-get install wireshark
 sudo apt-get install tshark
+sudo apt-get install nmap
 pip3 install pyshark
 pip3 install argparse
 pip3 install pathlib
