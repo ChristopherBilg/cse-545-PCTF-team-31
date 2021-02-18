@@ -1,4 +1,5 @@
 # Initialize the environment for the script runner and modules
+sudo apt-get install python
 sudo apt-get install python3
 sudo apt-get install wireshark
 sudo apt-get install tshark
