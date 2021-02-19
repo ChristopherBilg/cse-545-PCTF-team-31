@@ -2,7 +2,7 @@
 
 import swpag_client
 
-URL = "127.0.0.1"
+URL = "<INSERT DURING CTF AND COMMIT>"
 TEAM_URL = "http://" + URL + "/"
 TEAM_FLAG_TOKEN = "<INSERT DURING CTF AND COMMIT>"
 
