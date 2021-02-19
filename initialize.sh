@@ -11,3 +11,4 @@ pip3 install importlib
 pip install swpag_client
 pip3 install scapy
 pip install scapy
+python3 -m pip install --upgrade pwntools
