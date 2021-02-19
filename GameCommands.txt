@@ -1,0 +1,41 @@
+ ssh -i <keyfile> ctf@<ip>
+scp -i <keyfile> ctf@<ip>:<source path> <destination path>
+scp -i <keyfile> <source path/filename>  ctf@<ip>:<dest path>
+
+
+
+pip3 install swpag_client
+import swpag_client
+t = swpag_client.Team("http://<interface ip address>", "<Token>")
+t.submit_flag([<flag array>])
+t.get_vm()
+t.get_targets(<service id>)
+t.get_service_list()
+t.get_tick_info()
+
+
+"/etc/hosts" has ip list of other teams
+
+nc  <ip address> <port>
+
+Services:
+
+ls -la /opt/ictf/services
+
+Each service has three directories: append, ro (stands for read only), and rw (stands for read write)
+
+"docker-compose ps"  this shows the service status 
+"docker-compose down"
+"docker-compose up"
+
+cat ro/xinetd.conf
+
+Example exploit for 
+import pwn
+r = pwn.remote("<ip>", <port>)
+r.recvuntil("<String>")
+r.send("string")
+r.interactive()
+
+
+
