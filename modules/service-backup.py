@@ -26,7 +26,7 @@ def main():
   destination_directory = args["destination_directory"]
 
   try:
-    subprocess.Popen("cp -rf /opt {0}".format(destination_directory), shell=True)
+    subprocess.Popen("cp -rf /opt/ictf {0}".format(destination_directory), shell=True)
   except Exception as e:
     print(e)
 
